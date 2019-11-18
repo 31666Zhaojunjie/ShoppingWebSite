@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        a{
+            text-decoration: none;
+            margin-left: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<table class="table">
+    <tbody>
+    <tr align="center">
+        <td>编号</td>
+        <td>姓名</td>
+        <td>性别</td>
+    </tr>
+    <tr align="center" th:each="stu:${list}">
+        <td th:text="${stu.id}"></td>
+        <td th:text="${stu.name}"></td>
+        <td th:text="${stu.sex}"></td>
+    </tr>
+    <tr align="center">
+        <td th:switch="${pageNum}">
+            <p th:case="1"><a th:href="@{/stu/(pageNum=1)}">上一页</a></p>
+            <p th:case="*"><a th:href="@{/stu/(pageNum=${pageNum}-1)}">上一页</a></p>
+        </td>
+        <td>
+            <p><a th:each="p:${page}" th:text="${p}" th:href="@{/stu/(pageNum=${p})}"></a></p>
+        </td>
+        <td th:switch="${pageNum}">
+            <p th:case="${sumPage}"><a th:href="@{/stu/(pageNum=${sumPage})}">下一页</a></p>
+            <p th:case="*"><a th:href="@{/stu/(pageNum=${pageNum}+1)}">下一页</a></p>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
